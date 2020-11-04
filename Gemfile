@@ -13,6 +13,14 @@ gem 'bootsnap', '>= 1.4.2', require: false
 #Auth
 gem 'devise_token_auth', '~> 1.1.4'
 
+# styles
+gem 'foundation-rails'
+gem 'autoprefixer-rails'
+gem 'inky-rb', require: 'inky' 
+gem 'premailer-rails'
+gem 'sassc-rails', '~> 2.1', '>= 2.1.2'
+
+
 group :development, :test do
   gem 'rubocop'
   gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]

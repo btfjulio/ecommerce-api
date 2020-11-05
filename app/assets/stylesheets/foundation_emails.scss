@@ -26,7 +26,10 @@ $regular-grey: #6F787A;
     position: absolute;
     right: 30px;
     top: 10px;
-    width: 150px;
+    width: 25%;
+    @media screen and (max-width: 400px){
+      width: 40% !important;
+    }
   }
   div {
     margin-top: 100px;
@@ -36,15 +39,16 @@ $regular-grey: #6F787A;
     justify-content: space-between;
     height: 120px;
   }
+  @media screen and (max-width: 400px){
+    p {
+      margin-top: 10px !important;
+    }
+  }
 }
 
 .text {
   margin:0 10px !important;
   color:#e9ecef !important;
-}
-
-.image {
-  width: 60px;
 }
 
 p > span {

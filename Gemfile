@@ -6,19 +6,19 @@ ruby '2.7.1'
 gem 'rails', '~> 6.0.3', '>= 6.0.3.3'
 
 # basic
-gem 'pg', '>= 0.18', '< 2.0'
-gem 'puma', '~> 4.1'
-gem 'bootsnap', '>= 1.4.2', require: false
+gem 'pg', '>= 0.18', '< 2.0' #db
+gem 'puma', '~> 4.1' #server
+gem 'bootsnap', '>= 1.4.2', require: false #cache optimization
  
 #Auth
-gem 'devise_token_auth', '~> 1.1.4'
+gem 'devise_token_auth', '~> 1.1.4' #api authentication
 
 # styles
-gem 'foundation-rails'
-gem 'autoprefixer-rails'
-gem 'inky-rb', require: 'inky' 
-gem 'premailer-rails'
-gem 'sassc-rails', '~> 2.1', '>= 2.1.2'
+gem 'foundation-rails' #mail css
+gem 'autoprefixer-rails' #add vendor prefixes
+gem 'inky-rb', require: 'inky' #mail DSN design templates
+gem 'premailer-rails' #provides inline css
+gem 'sassc-rails', '~> 2.1', '>= 2.1.2' #add sass to rails
 
 
 group :development, :test do

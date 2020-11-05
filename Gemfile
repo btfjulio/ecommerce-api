@@ -13,6 +13,9 @@ gem 'bootsnap', '>= 1.4.2', require: false #cache optimization
 #Auth
 gem 'devise_token_auth', '~> 1.1.4' #api authentication
 
+#CORS
+gem 'rack-cors', '~> 1.1.1'
+
 # styles
 gem 'foundation-rails' #mail css
 gem 'autoprefixer-rails' #add vendor prefixes

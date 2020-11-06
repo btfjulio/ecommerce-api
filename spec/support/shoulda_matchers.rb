@@ -1,6 +1,6 @@
 Shoulda::Matchers.configure do |config|
-  config.integrate to |with|
+  config.integrate do |with|
     with.test_framework :rspec
-    with.libray :rails
+    with.library :rails
   end
 end

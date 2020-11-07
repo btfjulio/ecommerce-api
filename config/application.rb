@@ -21,7 +21,6 @@ module EcommerceApi
 
     config.i18n.default_locale = :'pt-BR'
     config.i18n.load_path += Dir[Rails.root.join('config/locales/**/*.{rb,yml}')]
-    config.assets.precompile += %w(foundation_emails.scss)
     config.api_only = true
   end
 end

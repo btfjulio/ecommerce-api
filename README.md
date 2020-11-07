@@ -1,24 +1,21 @@
-# README
-
-This README would normally document whatever steps are necessary to get the
-application up and running.
+# Ecommerce-Api
+Api, built on Rails, using Devise Auth Token for authentication, Rspec(shoulda_matchers, factorybot) for tests.
+Serve and interact with a ReactJs and React Native client-sides.
 
 Things you may want to cover:
 
-* Ruby version
+* Ruby version: 2.7.1
 
-* System dependencies
+* Rails version: 6.0.3.4
 
-* Configuration
+* Database: postgresql
 
-* Database creation
+* Database creation \
+  `$ rake db:create`
 
-* Database initialization
+* Database initialization \
+  `$ rake db:migrate`
 
-* How to run the test suite
+* How to run the test suite: bundle exec rspec
 
-* Services (job queues, cache servers, search engines, etc.)
 
-* Deployment instructions
-
-* ...

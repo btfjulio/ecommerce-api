@@ -4,7 +4,7 @@ Rails.application.routes.draw do
   namespace :admin do
     namespace :v1 do
       get "/home", to: "home#index"
-      resources :categories, only: %i(index show create update)
+      resources :categories, only: %i(index show create update destroy)
     end
   end 
 

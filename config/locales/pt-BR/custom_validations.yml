@@ -1,0 +1,6 @@
+---
+pt-BR:
+  activerecord:
+    errors:
+      messages:
+        future_date: 'A data de expiração do cupom deve maior que a data atual'

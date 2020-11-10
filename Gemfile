@@ -23,6 +23,9 @@ gem 'inky-rb', require: 'inky' #mail DSN design templates
 gem 'premailer-rails' #provides inline css
 gem 'sassc-rails', '~> 2.1', '>= 2.1.2' #add sass to rails
 
+# api interface
+gem 'jbuilder', '~> 2.10.1'
+
 
 group :development, :test do
   gem 'rubocop'

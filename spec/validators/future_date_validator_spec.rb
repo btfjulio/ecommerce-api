@@ -36,7 +36,7 @@ describe FutureDateValidator do
     end
   end
 
-
+  
   context "when date is after current date" do
     before { subject.date = Time.zone.now + 1.day }
 

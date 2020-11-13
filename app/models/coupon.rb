@@ -9,4 +9,7 @@ class Coupon < ApplicationRecord
             numericality: { greater_than: 0 }
   
   enum status: { active: 1, inactive: 2 }
+
+
+  include Paginatable
 end

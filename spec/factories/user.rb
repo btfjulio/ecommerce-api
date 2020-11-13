@@ -4,6 +4,6 @@ FactoryBot.define do
     sequence(:email) { Faker::Internet.email }
     sequence(:password) { "123456" }
     sequence(:password_confirmation) { "123456" }
-    sequence(:profile) { %i(admin client).sample }
+    sequence(:profile) { :admin }
   end
 end

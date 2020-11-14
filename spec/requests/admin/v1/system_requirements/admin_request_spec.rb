@@ -9,9 +9,7 @@ RSpec.describe "Admin::V1::SystemRequirements as admin", type: :request do
 
     it "returns all system_requirements" do
       get(url, headers: auth_header(user))
-      expected = system_requirements.as_json(only: %i(id name operational_system
-                                                storage processor memory video_board
-                                              ))
+      expected = system_requirements.as_json(only: [:id, *SystemRequirement.list_params])
       expect(body_json['system_requirements']).to eq(expected)
     end
 
@@ -39,9 +37,7 @@ RSpec.describe "Admin::V1::SystemRequirements as admin", type: :request do
       it "returns last added system_requirement" do
         expect do
           post url, headers: auth_header(user), params: system_requirement_params
-          expected = SystemRequirement.last.as_json(only: %i(id name operational_system
-                                                                          storage processor memory video_board
-                                                                        ))
+          expected = SystemRequirement.last.as_json(only: [:id, *SystemRequirement.list_params])
           puts SystemRequirement.last                                                    
           expect(body_json['system_requirement']).to eq(expected)
         end
@@ -95,9 +91,7 @@ RSpec.describe "Admin::V1::SystemRequirements as admin", type: :request do
       it "returns updated system_requirement" do
         patch url, headers: auth_header(user), params: system_requirement_params
         system_requirement.reload
-        expected = system_requirement.as_json(only: %i(id name operational_system
-                                                storage processor memory video_board
-                                              ))
+        expected = system_requirement.as_json(only: [:id, *SystemRequirement.list_params])
                                               
         expect(body_json["system_requirement"]).to eq(expected) 
       end
@@ -169,7 +163,7 @@ RSpec.describe "Admin::V1::SystemRequirements as admin", type: :request do
 
       it "returns error messages" do
         delete url, headers: auth_header(user)
-        expect(body_json["errors"]["fields"]).to have_key("name")
+        expect(body_json["errors"]["fields"]).to have_key("base")
       end
   
     end

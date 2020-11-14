@@ -17,7 +17,7 @@ module Admin::V1
     end
 
     def destroy 
-      @category.destroy
+      @category.destroy!
     rescue
       render_error(fields: @category.errors.messages)
     end

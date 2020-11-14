@@ -12,4 +12,8 @@ class SystemRequirement < ApplicationRecord
   include NameSearchable
   include Paginatable
 
+  def self.list_params
+    %i(name operational_system storage processor memory video_board)
+  end
+
 end

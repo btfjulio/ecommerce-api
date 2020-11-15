@@ -1,4 +1,4 @@
-module ListParams
+module Listable
   extend ActiveSupport::Concern
 
   included do

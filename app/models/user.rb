@@ -13,6 +13,9 @@ class User < ActiveRecord::Base
 
   include NameSearchable
   include Paginatable
-  include Listable
+
+  def self.list_params 
+    %i(uid name email profile)
+  end
 
 end

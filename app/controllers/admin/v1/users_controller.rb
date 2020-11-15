@@ -31,7 +31,7 @@ module Admin::V1
 
     def user_params 
       return {} unless params.has_key?(:user)
-      params.require(:user).permit(User.list_params)
+      params.require(:user).permit(:name, :email, :password, :password_confirmation, :profile)
     end
 
     def save_user!

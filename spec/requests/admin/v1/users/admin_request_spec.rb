@@ -1,7 +1,7 @@
 require 'rails_helper'
 
 RSpec.describe "Admin::V1::Users as admin", type: :request do
-  let(:user) { create(:user) }
+  let!(:user) { create(:user) }
 
   context "GET /users" do    
     let(:url) { "/admin/v1/users" }
@@ -9,7 +9,7 @@ RSpec.describe "Admin::V1::Users as admin", type: :request do
 
     it "returns all users" do
       get(url, headers: auth_header(user))
-      expected = users.as_json(only: [:id, *User.list_params])
+      expected = User.all.as_json(only: [:id, *User.list_params])
       expect(body_json['users']).to eq(expected)
     end
 
@@ -37,7 +37,7 @@ RSpec.describe "Admin::V1::Users as admin", type: :request do
       it "returns last added user" do
         expect do
           post url, headers: auth_header(user), params: user_params
-          expected = user.last.as_json(only: [:id, *user.list_params])
+          expected = user.last.as_json(only: [:id, *User.list_params])
           expect(body_json['user']).to eq(expected)
         end
       end
@@ -90,7 +90,7 @@ RSpec.describe "Admin::V1::Users as admin", type: :request do
       it "returns updated user" do
         patch url, headers: auth_header(user), params: user_params
         user.reload
-        expected = user.as_json(only: [:id, *user.list_params])
+        expected = user.as_json(only: [:id, *User.list_params])
                                               
         expect(body_json["user"]).to eq(expected) 
       end
@@ -122,8 +122,8 @@ RSpec.describe "Admin::V1::Users as admin", type: :request do
   end
 
   context "DELETE /users" do
-    let!(:user) { create(:user) }
-    let(:url) { "/admin/v1/users/#{user.id}"}
+    let!(:user_to_delete) { create(:user) }
+    let(:url) { "/admin/v1/users/#{user_to_delete.id}"}
 
     it "removes user" do
       expect do
@@ -136,7 +136,7 @@ RSpec.describe "Admin::V1::Users as admin", type: :request do
       expect(response).to have_http_status(:no_content)
     end
 
-    it "does not return any body contend" do
+    it "does not return any body contentx" do
       delete url, headers: auth_header(user)
       expect(body_json).to_not be_present
     end

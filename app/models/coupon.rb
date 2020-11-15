@@ -12,6 +12,6 @@ class Coupon < ApplicationRecord
 
 
   include Paginatable
-  include ListParams
+  include Listable
 
 end

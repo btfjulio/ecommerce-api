@@ -13,4 +13,6 @@ class User < ActiveRecord::Base
 
   include NameSearchable
   include Paginatable
+  include Listable
+
 end

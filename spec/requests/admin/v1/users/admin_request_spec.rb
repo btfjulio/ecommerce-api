@@ -125,26 +125,21 @@ RSpec.describe "Admin::V1::Users as admin", type: :request do
     let!(:user) { create(:user) }
     let(:url) { "/admin/v1/users/#{user.id}"}
 
-    context "system requirement has no associated games" do
-
-      it "removes user" do
-        expect do
-          delete url, headers: auth_header(user)
-        end.to change(User, :count).by(-1)
-      end
-
-      it "returns success status" do
+    it "removes user" do
+      expect do
         delete url, headers: auth_header(user)
-        expect(response).to have_http_status(:no_content)
-      end
-
-      it "does not return any body contend" do
-        delete url, headers: auth_header(user)
-        expect(body_json).to_not be_present
-      end
-      
+      end.to change(User, :count).by(-1)
     end
 
+    it "returns success status" do
+      delete url, headers: auth_header(user)
+      expect(response).to have_http_status(:no_content)
+    end
+
+    it "does not return any body contend" do
+      delete url, headers: auth_header(user)
+      expect(body_json).to_not be_present
+    end
   end
 
 end

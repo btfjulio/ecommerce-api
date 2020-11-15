@@ -125,24 +125,20 @@ RSpec.describe "Admin::V1::Coupons as admin", type: :request do
     let!(:coupon) { create(:coupon) }
     let(:url) { "/admin/v1/coupons/#{coupon.id}"}
 
-    context "system requirement has no associated games" do
-
-      it "removes coupon" do
-        expect do
-          delete url, headers: auth_header(user)
-        end.to change(Coupon, :count).by(-1)
-      end
-
-      it "returns success status" do
+    it "removes coupon" do
+      expect do
         delete url, headers: auth_header(user)
-        expect(response).to have_http_status(:no_content)
-      end
+      end.to change(Coupon, :count).by(-1)
+    end
 
-      it "does not return any body contend" do
-        delete url, headers: auth_header(user)
-        expect(body_json).to_not be_present
-      end
-      
+    it "returns success status" do
+      delete url, headers: auth_header(user)
+      expect(response).to have_http_status(:no_content)
+    end
+
+    it "does not return any body content" do
+      delete url, headers: auth_header(user)
+      expect(body_json).to_not be_present
     end
 
   end

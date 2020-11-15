@@ -11,7 +11,7 @@ class SystemRequirement < ApplicationRecord
 
   include NameSearchable
   include Paginatable
-  include ListParams
+  include Listable
 
 
 end

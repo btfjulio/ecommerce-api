@@ -6,6 +6,7 @@ Rails.application.routes.draw do
       get "/home", to: "home#index"
       resources :categories, only: %i(index show create update destroy)
       resources :system_requirements, only: %i(index show create update destroy)
+      resources :coupons, only: %i(index show create update destroy)
 
     end
   end 

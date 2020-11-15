@@ -111,7 +111,7 @@ RSpec.describe "Admin::V1::Coupons as admin", type: :request do
 
       it "returns error messages" do
         patch url, headers: auth_header(user), params: coupon_invalid_params
-        expect(body_json["errors"]["fields"]).to have_key("name")
+        expect(body_json["errors"]["fields"]).to have_key("code")
       end
 
       it "returns unprocessable_entity staus" do

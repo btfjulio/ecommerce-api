@@ -143,4 +143,7 @@ RSpec.describe "Admin::V1::Coupons as admin", type: :request do
 
   end
 
+  it_behaves_like "unanthenticated requests", :coupon
+  it_behaves_like "client requests", :coupon
+
 end

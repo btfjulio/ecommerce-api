@@ -169,4 +169,7 @@ RSpec.describe "Admin::V1::SystemRequirements as admin", type: :request do
     end
   end
 
+  it_behaves_like "unanthenticated requests", :system_requirement
+  it_behaves_like "client requests", :system_requirement
+  
 end

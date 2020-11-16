@@ -142,4 +142,7 @@ RSpec.describe "Admin::V1::Users as admin", type: :request do
     end
   end
 
+  it_behaves_like "unanthenticated requests", :user
+  it_behaves_like "client requests", :user
+
 end

@@ -85,7 +85,22 @@ RSpec.describe "Admin::V1::Categories as admin", type: :request do
     end
   end
 
+  context "GET /categories/:id" do
+    let(:category) { create(:category) }
+    let(:url) { "/admin/v1/categories/#{category.id}" }
 
+    before { get url, headers: auth_header(user)}
+
+    it 'should return the right category' do
+      expected = category.as_json(only: %i(id name))
+      expect(body_json["category"]).to eq expected
+    end
+
+    it 'should return the right category' do
+      expect(response).to have_http_status(:ok)
+    end
+  end
+  
 
   context "POST /categories" do
     let(:url) { "/admin/v1/categories" }
@@ -138,7 +153,7 @@ RSpec.describe "Admin::V1::Categories as admin", type: :request do
   end
 
 
-  context "PATCH /categories" do
+  context "PATCH /categories/:id" do
     let(:category) { create(:category) }
     let(:url) { "/admin/v1//categories/#{category.id}"}
 
@@ -186,7 +201,7 @@ RSpec.describe "Admin::V1::Categories as admin", type: :request do
     end
   end
 
-  context "DELETE /categories" do
+  context "DELETE /categories/:id" do
     let!(:category) { create(:category) }
     let(:url) { "/admin/v1/categories/#{category.id}"}
 

@@ -17,23 +17,28 @@ module Admin
         @product.attributes = @product_params.reject { |key| key == :productable }
         build_productable
         ensure
-          save!
-        end
+        save!
       end
     end
 
     def build_productable
-      productable_class = @product_params[:productable].camelcase.safe_constantize
       @product.productable ||= productable_class.new
       @product.productable.attributes = @productable_params
+    end
+
+    def productable_class
+      @product_params[:productable].camelcase.safe_constantize
     end
 
     def save!
       save_record!(@product.productable) if @product.productable.present?
       save_record!(@product)
+      raise NotSavedProductError if @errors.present?
+      rescue => e
+      raise NotSavedProductError
     end
 
-    def saved_record!(record)
+    def save_record!(record)
       record.save!
     rescue ActiveRecord::RecordInvalid
       @errors.merge!(record.errors.messages)

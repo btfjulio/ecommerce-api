@@ -13,7 +13,7 @@ RSpec.describe Admin::ProductSavingService, type: :model do
         let(:params) do 
           { 
             name: "New product", 
-            category_ids: new_categories.pluck(:id),
+            category_ids: new_categories.map(&:id),
             productable_attributes: {
               developer: "New company"
             }
@@ -27,7 +27,7 @@ RSpec.describe Admin::ProductSavingService, type: :model do
         end
         
         it "updates product" do
-          expect(game.productable).to eq "New company"
+          expect(product.name).to eq "New product"
         end
 
         it "updates :productable" do

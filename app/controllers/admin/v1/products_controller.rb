@@ -6,8 +6,7 @@ module Admin::V1
       @products = set_products
     end
 
-    def show
-    end
+    def show; end
 
     def create
       @product = Product.new(product_params)
@@ -34,7 +33,10 @@ module Admin::V1
     def product_params
       return {} unless params.has_key?(:product)
 
-      params.require(:product).permit(:name, :description, :price, :productable_type, :productable_id)
+      params.require(:product).permit(
+        :name, :image, :price, :status,
+        :description, :price, :productable, category_ids: []
+      )
     end
 
     def set_products

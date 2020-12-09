@@ -1,3 +1,4 @@
+
 require 'rails_helper'
 
 RSpec.describe "Admin V1 Products as :admin", type: :request do
@@ -441,7 +442,6 @@ RSpec.describe "Admin V1 Products as :admin", type: :request do
     end
   end
 end
-
 
 def build_game_product_json(product)
   json = product.as_json(only: %i(id name description price status))

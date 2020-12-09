@@ -19,7 +19,6 @@ module Admin::V1
     def destroy 
       @user.destroy!
     rescue => e
-
       render_error(fields: @user.errors.messages)
     end
 

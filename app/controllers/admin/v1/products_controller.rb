@@ -11,9 +11,9 @@ module Admin::V1
     rescue Admin::ProductSavingService::NotSavedProductError
       render_error(fields: @saving_service.errors)
     end
-    
+
     def show; end
-    
+
     def update
       run_service
     rescue Admin::ProductSavingService::NotSavedProductError
@@ -24,12 +24,14 @@ module Admin::V1
       @product.productable.destroy!
       @product.destroy!
     rescue ActiveRecord::RecordNotDestroyed
-      render_error(fields: @product.errors.messages.merge(@product.productable.errors.messages))
+      render_error(
+        fields: @product.errors.messages.merge(@product.productable.errors.messages)
+      )
     end
 
     private
 
-    def run_service(product = nil)
+    def run_service(_product = nil)
       @saving_service = Admin::ProductSavingService.new(product_params.to_h, @product)
       @saving_service.call
       @product = @saving_service.product
@@ -44,19 +46,19 @@ module Admin::V1
       return {} unless params.has_key?(:product)
 
       permitted_params = params.require(:product).permit(
-        :name, :image, :price, :status,
+        :id, :name, :image, :price, :status,
         :description, :price, :productable, category_ids: []
       )
-
       permitted_params.merge(productable_params)
     end
 
     def productable_params
       productable_type = params[:product][:productable] || @product&.productable_type&.underscore
       return unless productable_type.present?
-      send("#{productable_type}_params")
+      productable_attributes = send("#{productable_type}_params")
+      { productable_attributes: productable_attributes }
     end
-    
+
     def game_params
       params.require(:product).permit(:mode, :release_date, :developer, :system_requirement_id)
     end

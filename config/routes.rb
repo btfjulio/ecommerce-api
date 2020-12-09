@@ -8,7 +8,7 @@ Rails.application.routes.draw do
       resources :system_requirements, only: %i(index show create update destroy)
       resources :coupons, only: %i(index show create update destroy)
       resources :users, only: %i(index show create update destroy)
-
+      resources :products, only: %i(index show create update destroy)
     end
   end 
 

@@ -98,6 +98,10 @@ RSpec.describe "Admin::V1::Licenses as admin", type: :request do
     end
 
     context "with invalid params" do
+      let(:license_invalid_params) do
+        { license: attributes_for(:license, key: nil) }.to_json
+      end
+      
       it 'does not update license' do
         old_key = license.key
         patch url, headers: auth_header(user), params: license_invalid_params 
@@ -121,47 +125,22 @@ RSpec.describe "Admin::V1::Licenses as admin", type: :request do
     let!(:license) { create(:license) }
     let(:url) { "/admin/v1/licences/#{license.id}"}
 
-    context "system requirement has no associated games" do
-
-      it "removes license" do
-        expect do
-          delete url, headers: auth_header(user)
-        end.to change(License, :count).by(-1)
-      end
-
-      it "returns success status" do
+    it "removes license" do
+      expect do
         delete url, headers: auth_header(user)
-        expect(response).to have_http_status(:no_content)
-      end
-
-      it "does not return any body content" do
-        delete url, headers: auth_header(user)
-        expect(body_json).to_not be_present
-      end
-      
+      end.to change(License, :count).by(-1)
     end
 
-
-    context "system requirement has associated games" do
-      before { create_list(:game, 3, license: license) }
-
-      it "not removes system requirement" do
-        expect do
-          delete url, headers: auth_header(user)
-        end.not_to change(License, :count)
-      end
-
-      it "returns unprocesable entity" do
-        delete url, headers: auth_header(user)
-        expect(response).to have_http_status(:unprocessable_entity)
-      end
-
-      it "returns error messages" do
-        delete url, headers: auth_header(user)
-        expect(body_json["errors"]["fields"]).to have_key("base")
-      end
-  
+    it "returns success status" do
+      delete url, headers: auth_header(user)
+      expect(response).to have_http_status(:no_content)
     end
+
+    it "does not return any body content" do
+      delete url, headers: auth_header(user)
+      expect(body_json).to_not be_present
+    end
+
   end
 
   it_behaves_like "unanthenticated requests", :license

@@ -1,9 +1,12 @@
 module Admin::V1
   class LicensesController < ApplicationController
-    before_action :set_license, only: %i(update destroy)
+    before_action :set_license, only: %i(show update destroy)
 
     def index 
       @licenses = License.all
+    end
+
+    def show 
     end
 
     def create 

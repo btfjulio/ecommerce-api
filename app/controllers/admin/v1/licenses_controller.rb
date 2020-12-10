@@ -1,5 +1,5 @@
 module Admin::V1
-  class LicensesController < ApplicationController
+  class LicensesController < ApiController
     before_action :set_license, only: %i(show update destroy)
 
     def index 

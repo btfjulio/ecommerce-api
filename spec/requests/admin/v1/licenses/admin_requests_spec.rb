@@ -3,14 +3,14 @@ require 'rails_helper'
 RSpec.describe "Admin::V1::Licenses as admin", type: :request do
   let(:user) { create(:user) }
 
-  context "GET /licences" do    
-    let(:url) { "/admin/v1/licences" }
-    let!(:licences) { create_list(:license, 5) }
+  context "GET /licenses" do    
+    let(:url) { "/admin/v1/licenses" }
+    let!(:licenses) { create_list(:license, 5) }
 
-    it "returns all licences" do
+    it "returns all licenses" do
       get(url, headers: auth_header(user))
-      expected = licences.as_json(only: [:id, *License.list_params])
-      expect(body_json['licences']).to eq(expected)
+      expected = licenses.as_json(only: [:id, *License.list_params])
+      expect(body_json['licenses']).to eq(expected)
     end
 
     it "returns success status" do
@@ -20,8 +20,8 @@ RSpec.describe "Admin::V1::Licenses as admin", type: :request do
   end
 
 
-  context "POST /licences" do
-    let(:url) { "/admin/v1/licences" }
+  context "POST /licenses" do
+    let(:url) { "/admin/v1/licenses" }
 
     context "with valid params" do
       let(:license_params) do 
@@ -30,6 +30,7 @@ RSpec.describe "Admin::V1::Licenses as admin", type: :request do
 
       it "add a new license" do
         expect do
+          binding.pry
           post url, headers: auth_header(user), params: license_params
         end.to change(License, :count).by(1)
       end
@@ -74,9 +75,9 @@ RSpec.describe "Admin::V1::Licenses as admin", type: :request do
 
   end
 
-  context "PATCH /licences" do
+  context "PATCH /licenses" do
     let(:license) { create(:license) }
-    let(:url) { "/admin/v1//licences/#{license.id}"}
+    let(:url) { "/admin/v1//licenses/#{license.id}"}
 
     context "with valid params" do
       let(:new_key) { Faker::Alphanumeric.alphanumeric(number: 20) }
@@ -121,9 +122,9 @@ RSpec.describe "Admin::V1::Licenses as admin", type: :request do
     end
   end
 
-  context "DELETE /licences" do
+  context "DELETE /licenses" do
     let!(:license) { create(:license) }
-    let(:url) { "/admin/v1/licences/#{license.id}"}
+    let(:url) { "/admin/v1/licenses/#{license.id}"}
 
     it "removes license" do
       expect do

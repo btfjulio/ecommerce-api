@@ -3,7 +3,7 @@ module Admin::V1
     before_action :set_product, only: %i[show update destroy]
 
     def index
-      @products = set_products
+      @loading_servce = Admin::ModelLoadingService.new(Product.all, searchable_params).call
     end
 
     def create
@@ -63,9 +63,8 @@ module Admin::V1
       params.require(:product).permit(:mode, :release_date, :developer, :system_requirement_id)
     end
 
-    def set_products
-      permited_params = params.permit({ search: :name }, { order: {} }, :page, :length)
-      Admin::ModelLoadingService.new(Product.all, permited_params).call
+    def searchable_params
+      params.permit({ search: :name }, { order: {} }, :page, :length)
     end
 
     def save_product!

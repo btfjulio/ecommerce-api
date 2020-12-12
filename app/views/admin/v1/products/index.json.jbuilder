@@ -1,5 +1,5 @@
 json.products do
-  json.array! @products do |product|
+  json.array! @loading_servce.records do |product|
     json.partial! product
     json.partial! product.productable
   end

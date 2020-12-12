@@ -11,6 +11,7 @@ module Admin::V1
 
     def create 
       @license = License.new(license_params)
+      @license.user = current_user
       save_license!
     end
 

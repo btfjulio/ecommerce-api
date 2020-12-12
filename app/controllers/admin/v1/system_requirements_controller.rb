@@ -6,6 +6,9 @@ module Admin::V1
       @system_requirements = SystemRequirement.all
     end
 
+    def show 
+    end
+
     def create 
       @system_requirement = SystemRequirement.new(system_requirement_params)
       save_system_requirement!

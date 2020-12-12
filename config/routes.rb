@@ -9,6 +9,8 @@ Rails.application.routes.draw do
       resources :coupons, only: %i(index show create update destroy)
       resources :users, only: %i(index show create update destroy)
       resources :products, only: %i(index show create update destroy)
+      resources :licenses, only: %i(index show create update destroy)
+
     end
   end 
 

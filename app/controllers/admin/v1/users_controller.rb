@@ -1,9 +1,12 @@
 module Admin::V1
   class UsersController < ApiController
-    before_action :set_user, only: %i(update destroy)
+    before_action :set_user, only: %i(show update destroy)
 
     def index 
       @users = User.all
+    end
+
+    def show 
     end
 
     def create 

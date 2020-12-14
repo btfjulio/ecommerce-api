@@ -3,7 +3,8 @@ module Admin::V1
     before_action :set_product, only: %i[show update destroy]
 
     def index
-      @loading_servce = Admin::ModelLoadingService.new(Product.all, searchable_params).call
+      @loading_service = Admin::ModelLoadingService.new(Product.all, searchable_params)
+      @loading_service.call
     end
 
     def create

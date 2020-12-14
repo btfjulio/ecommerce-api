@@ -3,8 +3,8 @@ module Admin::V1
     before_action :set_category, only: %i[show update destroy]
 
     def index
-      @loading_servce = Admin::ModelLoadingService.new(Category.all, searchable_params)
-      @loading_servce.call
+      @loading_service = Admin::ModelLoadingService.new(Category.all, searchable_params)
+      @loading_service.call
     end
 
     def show
